@@ -4,7 +4,6 @@ import asyncio
 import random
 import re
 import sys
-import json
 import os
 import traceback
 
@@ -12,10 +11,6 @@ intent = discord.Intents.default()
 intent.members = True
 
 bot = commands.Bot(command_prefix='./', case_insensitive=True, intents=intent)
-
-with open('config.json','r') as configjsonfile:
-    configdata = json.load(configjsonfile)
-    token = configdata['DISCORD_TOKEN']
 
 bot.remove_command('help')
 
@@ -36,4 +31,4 @@ if __name__ == "__main__":
             print(f'error loading {extension}', file = sys.stderr)
             traceback.print_exc()
 
-bot.run(token)
+bot.run('NzY5NTMyNjM2MjQyMjQ3Njgx.X5QZHQ.jnEfTHHnAqeVnwyWR3150WjGPgE')
