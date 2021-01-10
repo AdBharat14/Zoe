@@ -12,13 +12,12 @@ class Welcome(commands.Cog,name='Welcome'):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if self.bot.user.id != message.author.id:
-            s = message.content
-            s = s.lower()
-            if 'happy new year' in s:
+        if len(str(message.content))>4:
+            if str(message.content)[0:2]=='<:' and str(message.content)[-1]=='>':
                 mem_name, mem_discr = str(message.author).split('#')
-                if mem_name!='ace' and mem_discr!='0314':
-                    await message.channel.send(f'Wish you a happy new year\nMay this year bring joy and we hope you find a shiny darkrai and arceus\n-from Ace and Zoe')
+                if mem_name=='ace01' and mem_discr=='0314':
+                    await message.channel.send(message.content)
+                    await message.delete()
 
     
     # @commands.Cog.listener()
