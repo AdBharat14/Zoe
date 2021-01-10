@@ -9,34 +9,50 @@ class Fun(commands.Cog, name = 'Fun'):
         self.bot = bot
 
     @commands.command()
-    async def ace(self, ctx):
-        s = ['pro', 'pro', 'blush', 'coder', 'My owner','My owner','My owner','coder','coder','coder']
-        i = random.randint(0,8)
-        await ctx.send(s[i])
+    async def about(self, ctx, *, s):
+        l=s.split()
+        if l[0]=='set':
+            role = discord.utils.get(ctx.guild.roles, name='Moderator')
+            if role in ctx.author.roles:
+                with open('about.txt','a+') as f:
+                    if self.check(l[1]):
+                        self.dlt(l[1])
+                    s1=' '.join(l[2:])
+                    s1=l[1]+':'+s1+'\n'
+                    f.write(s1)
+            else:
+                await ctx.send('Try again when you have perms')
+        else:
+            with open('about.txt','r') as f:
+                for line in f:
+                    l1=line.split(':')
+                    if s==l1[0]:
+                        s1=':'.join(l1[1:])
+                        l2=s1.split(' ')
+                        i = random.randint(0,len(l2)-1)
+                        await ctx.send(l2[i])
+                        break
+                else:
+                    await ctx.send('Data Not found')
 
-    @commands.command()
-    async def sonia(self, ctx):
-        s = ['egg excl master', 'pro', 'pro', 'Bony','egg excl master','egg excl master','Bony','never ;r d!','never ;r d!']
-        i = random.randint(0,8)
-        await ctx.send(s[i])
+    def check(self, s):
+        with open('about.txt','r') as f:
+            for line in f:
+                l1=line.split(':')
+                if s==l1[0]:
+                    return True
+        return False
 
-    @commands.command()
-    async def Justice(self, ctx):
-        s = ['Lucky', 'Pro', 'Biggest simp :KeKw:', 'shiny ray and shiny arc','Biggest simp :KeKw:','Biggest simp :KeKw:','Lucky','Lucky','Pro','Pro','shiny ray and shiny arc']
-        i = random.randint(0,10)
-        await ctx.send(s[i])
+    def dlt(self, s):
+        lines = ''
+        with open('about.txt','r') as f:
+            lines=f.read()
+        with open('about.txt','w') as f:
+            for line in lines.splitlines():
+                l1=line.split(':')
+                if s!=l1[0]:
+                    f.write(line+'\n')
 
-    @commands.command()
-    async def kei(self, ctx):
-        s = ['sells everything', 'QT', 'QT', 'pro', 'pro', 'mikasa!','sells everything','sells everything','sells everything','QT','QT','QT','mikasa!','mikasa!']
-        i = random.randint(0,13)
-        await ctx.send(s[i])
-
-    @commands.command()
-    async def smile(self, ctx):
-        s = ['lurk', 'lurk', 'frown', 'biggest noob', 'baka']
-        i = random.randint(0,4)
-        await ctx.send(s[i])
 
     @commands.command()
     async def nbroll(self, ctx, num=100):
