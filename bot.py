@@ -31,4 +31,4 @@ if __name__ == "__main__":
             print(f'error loading {extension}', file = sys.stderr)
             traceback.print_exc()
 
-bot.run('NzY5NTMyNjM2MjQyMjQ3Njgx.X5QZHQ.jnEfTHHnAqeVnwyWR3150WjGPgE')
+bot.run('')
